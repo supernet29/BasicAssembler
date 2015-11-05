@@ -4,7 +4,8 @@
 namespace wc_string
 {
 	void
-	StringControlTools::deleteConnectedSpaceCharacter(string& str)
+	StringControlTools::deleteConnectedSpaceCharacter
+	(string& str)
 	{
 		bool deleteReady = false;
 		unsigned int i, j;
@@ -35,7 +36,8 @@ namespace wc_string
 	}
 	
 	void
-	StringControlTools::cleanString(string& str)
+	StringControlTools::cleanString
+	(string& str)
 	{
 		unsigned int i = 0, j = 0;
 		unsigned int strLength = str.length();
@@ -54,4 +56,38 @@ namespace wc_string
 		
 		str = str.substr(i, j-i+1);
 	}
+	
+	bool
+	StringControlTools::splitStringBetweenCharacter
+	(string& src, string& des, char ch)
+	{
+		int pos;
+		unsigned int chPos;
+		unsigned int srcLen = src.length();
+		pos = findCharacterPosition(src, ch);
+		
+		if(pos < 0 )
+			return false;
+
+		chPos = (unsigned int )pos;	
+		des = src.substr(0, chPos);
+		src = src.substr(chPos + 1,srcLen - chPos -1);
+		return true;
+	}
+		
+
+	int
+	StringControlTools::findCharacterPosition
+	(const string& src, char ch)
+	{
+		unsigned int i;
+		unsigned int srcLen = src.length();
+		
+		for(i = 0; i < srcLen; i++) 
+		{
+			if(src[i] == ch)
+				return i;
+		}
+		return -1;
+	}	
 }

@@ -2,23 +2,37 @@
 #define INSTRUCTION_READER_H
 
 #include <fstream>
+#include <list>
+#include "StringControlTools.h"
 #include "DisjunctInstruction.h"
 
 using std::ifstream;
 
-class InstructionReader
+namespace wc_assembler
 {
-public:
+	class InstructionReader
+	{
+	public:
 
-	InstructionReader(istream* fileStream);
-
+		InstructionReader
+		(istream* Stream);
 		
-	
+		bool 
+		setStream
+		(istream* Stream);
 
-private:
+		void 
+		readInstructions
+		(list<DisjunctInstrcution>& list);	
+		
+		//TODO
+		
+	private:
 
-	istream * fileStream;
+		istream * fileStream;
 
-};
+		//TODO
+	};
+}
 
 #endif

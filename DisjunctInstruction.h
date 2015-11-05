@@ -5,16 +5,21 @@
 
 using namespace std;
 
-class DisjunctInstruction
+namespace wc_assembler
 {
-public:
-	DisjunctInstruction(string& label, string& instruction);
-	
-	string getLabel();
-	string getInstruction();
+	class DisjunctInstruction
+	{
+	public:
+		DisjunctInstruction(const string& label, const string& instruction);
+		
+		const string& getLabel();
+		const string& getInstruction();
 
-private:
+	private:
 
-	string label;
-	string instruction;
-};
+		string label;
+		string instruction;
+	};
+}
+
+#endif
