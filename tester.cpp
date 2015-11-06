@@ -12,12 +12,20 @@ void print(string& str)
 {
 	cout<<"=" <<str <<"=" <<endl;
 }
+
+void printDisjunctInstruction(DisjunctInstruction& instruction)
+{
+	cout<<"label: "<<"="<<instruction.getLabel()<<"="<<endl;
+	cout<<"instruction: "<<"="<<instruction.getInstruction()<<"="<<endl;
+}
 	
 int main(int argc, char** argv)
 {
 	cout<<"============="<<endl;
 	cout<<"Module Tester"<<endl;
 	cout<<"============="<<endl;
+
+	int lineNumber = 0;
 		
 	if(argc != 2)
 	{
@@ -35,10 +43,14 @@ int main(int argc, char** argv)
 	}
 	
 	InstructionReader reader(&asmFile);
-	DisjunctInstructionList result = reader.readInstructions();	
+	DisjunctInstructionList* result = reader.readInstructions();	
 	
-	for(DisjunctInstructionList::iterator i = result.begin(); i != result.end(); i++)
+	for(DisjunctInstructionList::iterator i = result->begin(); i != result->end(); i++, lineNumber++)
 	{
-		//TODO	
+		cout<<"-----------------------------"<<endl;
+		cout<<"LineNumber: " <<lineNumber <<endl;
+		cout<<"-----------------------------"<<endl;
+		printDisjunctInstruction(*i);
+	}
 	return 0;
 }

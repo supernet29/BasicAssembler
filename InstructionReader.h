@@ -9,6 +9,7 @@
 #include "DisjunctInstruction.h"
 
 using namespace std;
+using namespace wc_string;
 
 namespace wc_assembler
 {
@@ -32,14 +33,14 @@ namespace wc_assembler
 		setStream
 		(ifstream* fileStream);
 
-		DisjunctInstruction*
+		DisjunctInstructionList*
 		readInstructions
 		();
 		//TODO
 		
 	private:
 		StringControlTools tool;
-		bool streamOn = false;
+		bool streamOn;
 		istream * fileStream;
 		//TODO
 	};

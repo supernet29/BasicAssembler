@@ -6,7 +6,7 @@ namespace wc_assembler
 	(const string& label, const string& instruction)
 	{
 		this->label = label;
-		this->instruction = instruction
+		this->instruction = instruction;
 	}
 	
 	const string&

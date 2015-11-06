@@ -48,6 +48,12 @@ namespace wc_string
 		{
 			i++;
 		}
+		
+		if( i >= strLength )
+		{
+			str = "";
+			return;
+		}
 			
 		while(isspace(str[j]) && ( j >= 0 ))
 		{

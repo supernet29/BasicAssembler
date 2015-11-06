@@ -4,12 +4,14 @@ namespace wc_assembler
 {
 	InstructionReader::InstructionReader
 	(istream* Stream)
+	: streamOn(false)
 	{
 		setStream(Stream);
 	}
 
 	InstructionReader::InstructionReader
 	(ifstream* fileStream)
+	: streamOn(false)
 	{
 		setStream(fileStream);
 	}
@@ -49,7 +51,6 @@ namespace wc_assembler
 		string instruction;
 		DisjunctInstruction* temp;
 		DisjunctInstructionList* instList;
-		m_lineCounter = 1;
 
 		if(!streamOn)
 			return NULL;
@@ -72,7 +73,7 @@ namespace wc_assembler
 				tool.splitStringBetweenCharacter(line, label, ',');
 			}
 			
-			if(too.findCharacterPosition(line, '/') < 0 )
+			if(tool.findCharacterPosition(line, '/') < 0 )
 				instruction = line;	
 			else
 			{
