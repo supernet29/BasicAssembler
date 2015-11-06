@@ -30,11 +30,12 @@ namespace wc_string
 		splitStringBetweenCharacter
 		(string& src, string& des, char ch);
 
-		private:
-		
+		//fine a character position in a string
+		//if there are no matching character, return nagative number;	
 		int
 		findCharacterPosition
 		(const string& src, char ch);
+		private:
 
 	};
 }

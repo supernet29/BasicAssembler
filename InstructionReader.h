@@ -3,13 +3,17 @@
 
 #include <fstream>
 #include <list>
+#include <iostream>
+#include <cstdlib>
 #include "StringControlTools.h"
 #include "DisjunctInstruction.h"
 
-using std::ifstream;
+using namespace std;
 
 namespace wc_assembler
 {
+	typedef list<DisjunctInstruction> DisjunctInstructionList;
+	
 	class InstructionReader
 	{
 	public:
@@ -17,20 +21,26 @@ namespace wc_assembler
 		InstructionReader
 		(istream* Stream);
 		
+		InstructionReader
+		(ifstream* fileStream);
+		
 		bool 
 		setStream
 		(istream* Stream);
 
-		void 
+		bool
+		setStream
+		(ifstream* fileStream);
+
+		DisjunctInstruction*
 		readInstructions
-		(list<DisjunctInstrcution>& list);	
-		
+		();
 		//TODO
 		
 	private:
-
+		StringControlTools tool;
+		bool streamOn = false;
 		istream * fileStream;
-
 		//TODO
 	};
 }
