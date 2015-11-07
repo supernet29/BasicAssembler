@@ -4,14 +4,14 @@ namespace wc_assembler
 {
 	InstructionReader::InstructionReader
 	(istream* Stream)
-	: streamOn(false)
+	: streamOn(false), ln(0)
 	{
 		setStream(Stream);
 	}
 
 	InstructionReader::InstructionReader
 	(ifstream* fileStream)
-	: streamOn(false)
+	: streamOn(false), ln(0)
 	{
 		setStream(fileStream);
 	}
@@ -52,6 +52,8 @@ namespace wc_assembler
 		DisjunctInstruction* temp;
 		DisjunctInstructionList* instList;
 
+		ln = 0;
+
 		if(!streamOn)
 			return NULL;
 
@@ -59,7 +61,7 @@ namespace wc_assembler
 		if(!instList)
 		{
 			cerr<<"ERROR::Memory allocation fail"<<endl;
-			exit(1);
+			exit(3);
 		}	
 
 		while(getline(*fileStream, line))
@@ -83,13 +85,79 @@ namespace wc_assembler
 
 			tool.cleanString(label);
 			tool.cleanString(instruction);
-			
-			temp = new DisjunctInstruction(label, instruction);
-			
+
+			if(label == "")
+			{
+				if(isORG(instruction))
+				{
+					ln = getAddress(instruction);
+					continue;	
+				}
+				else if(isEND(instruction))
+				{
+					break;
+				}
+			}
+
+			temp = new DisjunctInstruction(label, instruction, ln);
+			if(!temp)
+			{
+				cerr<<"ERROR::Memory allocation fail"<<endl;
+				exit(3);
+			}	
 			instList->push_back(*temp);
+			ln++;
 		}
 			
 		return instList;
 	}	
+		
+	bool
+	InstructionReader::isORG
+	(const string& src)
+	{
+		int number = tool.countCharacter(src, ' ');
+		if(number != 1)
+			return false;	
+		
+		for(int i = 0; i < 3; i++)
+		{
+			if(src[i] != s_ORG[i])
+				return false;
+		}
+		return true;
+	}
+
+	bool
+	InstructionReader::isEND
+	(const string& src)
+	{
+		int number = tool.countCharacter(src, ' ');
+		if(number != 0)
+			return false;	
+		
+		for(int i = 0; i < 3; i++)
+		{
+			if(src[i] != s_END[i])
+				return false;
+		}
+		return true;
+	}
+
+	unsigned int
+	InstructionReader::getAddress
+	(const string& src)
+	{
+		string instruction;
+		string address = src;
+		
+		tool.splitStringBetweenCharacter(address, instruction, ' ');
+		
+		
+		return tool.hexStringToUInt(address);
+	}	
+
+	const string InstructionReader::s_ORG = "ORG";
+	const string InstructionReader::s_END = "END";
 		
 }

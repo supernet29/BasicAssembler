@@ -3,10 +3,11 @@
 namespace wc_assembler
 {
 	DisjunctInstruction::DisjunctInstruction
-	(const string& label, const string& instruction)
+	(const string& label, const string& instruction, int address)
 	{
 		this->label = label;
 		this->instruction = instruction;
+		this->address = address;
 	}
 	
 	const string&
@@ -21,5 +22,12 @@ namespace wc_assembler
 	()
 	{
 		return instruction;
+	}
+
+	int
+	DisjunctInstruction::getAddress
+	()
+	{
+		return address;
 	}
 }

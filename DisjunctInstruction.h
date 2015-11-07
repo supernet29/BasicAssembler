@@ -10,13 +10,23 @@ namespace wc_assembler
 	class DisjunctInstruction
 	{
 	public:
-		DisjunctInstruction(const string& label, const string& instruction);
+		DisjunctInstruction
+		(const string& label, const string& instruction, int address);
 		
-		const string& getLabel();
-		const string& getInstruction();
+		const string& 
+		getLabel
+		();
+
+		const string& 
+		getInstruction
+		();
+		
+		int
+		getAddress
+		();
 
 	private:
-
+		int address;
 		string label;
 		string instruction;
 	};

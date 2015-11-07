@@ -15,12 +15,17 @@ void print(string& str)
 
 void printDisjunctInstruction(DisjunctInstruction& instruction)
 {
+	cout.setf(ios::hex);
+	cout<<"address: " <<instruction.getAddress() <<endl;
 	cout<<"label: "<<"="<<instruction.getLabel()<<"="<<endl;
 	cout<<"instruction: "<<"="<<instruction.getInstruction()<<"="<<endl;
+	cout.unsetf(ios::hex);
 }
 	
 int main(int argc, char** argv)
 {
+	int alpa = 0;
+	StringControlTools strTool;
 	cout<<"============="<<endl;
 	cout<<"Module Tester"<<endl;
 	cout<<"============="<<endl;
@@ -52,5 +57,6 @@ int main(int argc, char** argv)
 		cout<<"-----------------------------"<<endl;
 		printDisjunctInstruction(*i);
 	}
+	
 	return 0;
 }

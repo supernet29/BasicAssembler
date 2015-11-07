@@ -35,7 +35,15 @@ namespace wc_string
 		int
 		findCharacterPosition
 		(const string& src, char ch);
-		private:
+		
+		//count how many character is in string
+		unsigned int
+		countCharacter
+		(const string& src, char ch);
+		
+		unsigned int
+		hexStringToUInt
+		(const string& src);
 
 	};
 }

@@ -37,12 +37,29 @@ namespace wc_assembler
 		readInstructions
 		();
 		//TODO
+		//
+		const static string s_ORG;
+		const static string s_END; 
 		
 	private:
-		StringControlTools tool;
+		int ln;
 		bool streamOn;
+		StringControlTools tool;
 		istream * fileStream;
 		//TODO
+
+		bool
+		isORG
+		(const string& src);
+		
+		bool
+		isEND
+		(const string& src);
+		
+		unsigned int
+		getAddress
+		(const string& src);
+
 	};
 }
 

@@ -1,5 +1,7 @@
 #include "StringControlTools.h"
+#include <iostream>
 #include <cctype>
+#include <cmath>
 
 namespace wc_string
 {
@@ -55,7 +57,7 @@ namespace wc_string
 			return;
 		}
 			
-		while(isspace(str[j]) && ( j >= 0 ))
+		while(isspace(str[j]) && ( j <= strLength ))
 		{
 			j--;
 		}
@@ -96,4 +98,96 @@ namespace wc_string
 		}
 		return -1;
 	}	
+		
+	unsigned int
+	StringControlTools::countCharacter
+	(const string& src, char ch)
+	{
+		unsigned int count = 0;
+		unsigned int srcLength = src.length();
+		
+		for(unsigned int i = 0; i < srcLength; i++)
+		{
+			if(src[i] == ch)
+				count++;
+		}
+		return count;
+	}
+
+	unsigned int
+	StringControlTools::hexStringToUInt
+	(const string& src)
+	{
+		int j;
+		unsigned int result = 0;
+		unsigned int srcLength = src.length();
+	
+		for(int i = 0; i < srcLength; i++)
+		{
+			switch(src[i])
+			{
+			case 'A':
+			case 'a':
+				j = 10;
+				break;
+			case 'B':
+			case 'b':
+				j = 11;
+				break;
+			case 'C':
+			case 'c':
+				j = 12;
+				break;
+			case 'D':
+			case 'd':
+				j = 13;
+				break;
+			case 'E':
+			case 'e':
+				j = 14;
+				break;
+			case 'f':
+			case 'F':		
+				j = 15;
+				break;
+			case '1':
+				j = 1;
+				break;
+			case '2':
+				j = 2;
+				break;
+			case '3':
+				j = 3;
+				break;
+			case '4':
+				j = 4;
+				break;
+			case '5':
+				j = 5;
+				break;
+			case '6':
+				j = 6;
+				break;
+			case '7':
+				j = 7;
+				break;
+			case '8':
+				j = 8;
+				break;
+			case '9':
+				j = 9;
+				break;
+			case '0':
+				j = 0;
+				break;
+			default:
+				cout<<"ERROR:: no vaild Format"<<endl;
+				return 0;
+			}
+			
+			result += j * pow(16, srcLength - i - 1);
+		}
+	
+		return result;
+	}
 }
