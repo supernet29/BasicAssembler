@@ -25,7 +25,6 @@ void printDisjunctInstruction(DisjunctInstruction& instruction)
 int main(int argc, char** argv)
 {
 	int alpa = 0;
-	StringControlTools strTool;
 	cout<<"============="<<endl;
 	cout<<"Module Tester"<<endl;
 	cout<<"============="<<endl;

@@ -122,7 +122,7 @@ namespace wc_string
 		unsigned int result = 0;
 		unsigned int srcLength = src.length();
 	
-		for(int i = 0; i < srcLength; i++)
+		for(unsigned int i = 0; i < srcLength; i++)
 		{
 			switch(src[i])
 			{
@@ -185,7 +185,7 @@ namespace wc_string
 				return 0;
 			}
 			
-			result += j * pow(16, srcLength - i - 1);
+			result += (unsigned int)(j * pow(16, srcLength - i - 1));
 		}
 	
 		return result;
