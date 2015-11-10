@@ -13,8 +13,6 @@ using namespace wc_string;
 
 namespace wc_assembler
 {
-	typedef list<DisjunctInstruction> DisjunctInstructionList;
-	
 	class InstructionReader
 	{
 	public:

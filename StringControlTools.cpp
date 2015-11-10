@@ -118,76 +118,95 @@ namespace wc_string
 	StringControlTools::hexStringToUInt
 	(const string& src)
 	{
+		return (unsigned int)stringToInt(src, 16);
+	}
+		
+	int
+	StringContorlTools::digitToInteger
+	(char digit)
+	{
+		int j;
+		switch(digit)
+		{
+		case 'A':
+		case 'a':
+			j = 10;
+			break;
+		case 'B':
+		case 'b':
+			j = 11;
+			break;
+		case 'C':
+		case 'c':
+			j = 12;
+			break;
+		case 'D':
+		case 'd':
+			j = 13;
+			break;
+		case 'E':
+		case 'e':
+			j = 14;
+			break;
+		case 'f':
+		case 'F':		
+			j = 15;
+			break;
+		case '1':
+			j = 1;
+			break;
+		case '2':
+			j = 2;
+			break;
+		case '3':
+			j = 3;
+			break;
+		case '4':
+			j = 4;
+			break;
+		case '5':
+			j = 5;
+			break;
+		case '6':
+			j = 6;
+			break;
+		case '7':
+			j = 7;
+			break;
+		case '8':
+			j = 8;
+			break;
+		case '9':
+			j = 9;
+			break;
+		case '0':
+			j = 0;
+			break;
+		default:
+			cout<<"ERROR:: no vaild Format"<<endl;
+			return -1;
+		}
+		return j;
+	}
+
+	int
+	stringToInt
+	(const string& src, int base)
+	{
 		int j;
 		unsigned int result = 0;
 		unsigned int srcLength = src.length();
-	
+
 		for(unsigned int i = 0; i < srcLength; i++)
 		{
-			switch(src[i])
+			j = digitToInteger(src[i]);
+			if(j < 0 || j >= base)
 			{
-			case 'A':
-			case 'a':
-				j = 10;
-				break;
-			case 'B':
-			case 'b':
-				j = 11;
-				break;
-			case 'C':
-			case 'c':
-				j = 12;
-				break;
-			case 'D':
-			case 'd':
-				j = 13;
-				break;
-			case 'E':
-			case 'e':
-				j = 14;
-				break;
-			case 'f':
-			case 'F':		
-				j = 15;
-				break;
-			case '1':
-				j = 1;
-				break;
-			case '2':
-				j = 2;
-				break;
-			case '3':
-				j = 3;
-				break;
-			case '4':
-				j = 4;
-				break;
-			case '5':
-				j = 5;
-				break;
-			case '6':
-				j = 6;
-				break;
-			case '7':
-				j = 7;
-				break;
-			case '8':
-				j = 8;
-				break;
-			case '9':
-				j = 9;
-				break;
-			case '0':
-				j = 0;
-				break;
-			default:
-				cout<<"ERROR:: no vaild Format"<<endl;
-				return 0;
+				cout<<"ERROR:: format Error";
 			}
-			
-			result += (unsigned int)(j * pow(16, srcLength - i - 1));
+			result += (unsigned int)(j * pow(base, srcLength - i - 1));
 		}
-	
 		return result;
+		
 	}
 }

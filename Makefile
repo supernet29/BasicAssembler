@@ -1,5 +1,5 @@
 
-tester.out : tester.o StringControlTools.o DisjunctInstruction.o InstructionReader.o
+tester : tester.o StringControlTools.o DisjunctInstruction.o InstructionReader.o
 	g++ -o tester.out tester.o StringControlTools.o DisjunctInstruction.o InstructionReader.o
 
 tester.o : StringControlTools.h DisjunctInstruction.h InstructionReader.h tester.cpp

@@ -45,6 +45,14 @@ namespace wc_string
 		hexStringToUInt
 		(const string& src);
 
+		int
+		digitToInteger
+		(char digit);
+		
+		int
+		stringToInt
+		(const string& src, int base);
+
 	};
 }
 

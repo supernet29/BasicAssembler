@@ -2,11 +2,13 @@
 #define DISJUNCT_INSTRUCTION
 
 #include <string>
+#include <list>
 
 using namespace std;
 
 namespace wc_assembler
 {
+
 	class DisjunctInstruction
 	{
 	public:
@@ -30,6 +32,8 @@ namespace wc_assembler
 		string label;
 		string instruction;
 	};
+
+	typedef list<DisjunctInstruction> DisjunctInstructionList;
 }
 
 #endif

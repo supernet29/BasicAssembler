@@ -15,11 +15,9 @@ void print(string& str)
 
 void printDisjunctInstruction(DisjunctInstruction& instruction)
 {
-	cout.setf(ios::hex);
-	cout<<"address: " <<instruction.getAddress() <<endl;
+	cout<<"address: " <<hex<<instruction.getAddress() <<endl;
 	cout<<"label: "<<"="<<instruction.getLabel()<<"="<<endl;
-	cout<<"instruction: "<<"="<<instruction.getInstruction()<<"="<<endl;
-	cout.unsetf(ios::hex);
+	cout<<"instruction: "<<"="<<instruction.getInstruction()<<"="<<dec<<endl;
 }
 	
 int main(int argc, char** argv)
