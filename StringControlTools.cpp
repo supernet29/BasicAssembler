@@ -122,7 +122,7 @@ namespace wc_string
 	}
 		
 	int
-	StringContorlTools::digitToInteger
+	StringControlTools::digitToInteger
 	(char digit)
 	{
 		int j;
@@ -190,7 +190,7 @@ namespace wc_string
 	}
 
 	int
-	stringToInt
+	StringControlTools::stringToInt
 	(const string& src, int base)
 	{
 		int j;
