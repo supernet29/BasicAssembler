@@ -29,6 +29,10 @@ namespace wc_assembler
 	};
 	
 	typedef list<LabelCode> LabelCodeList;
+	
+	short
+	findCodeByLabel
+	(LabelCodeList& list, const string& label);
 
 }
 

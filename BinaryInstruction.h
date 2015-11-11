@@ -3,6 +3,8 @@
 
 #include <list>
 
+using namespace std;
+
 namespace wc_assembler
 {
 	

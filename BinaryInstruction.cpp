@@ -2,7 +2,7 @@
 
 namespace wc_assembler
 {
-	BinartyInstruction::BinaryInstruction
+	BinaryInstruction::BinaryInstruction
 	(short address, short code)
 	:m_Address(address), m_Code(code)
 	{

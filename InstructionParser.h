@@ -6,8 +6,11 @@
 #include <iostream>
 #include "DisjunctInstruction.h"
 #include "LabelCode.h"
-#include "StringConstrolTools.h"
+#include "StringControlTools.h"
 #include "BinaryInstruction.h"
+
+using namespace std;
+using namespace wc_string;
 
 namespace wc_assembler
 {
@@ -30,7 +33,7 @@ namespace wc_assembler
 		private:
 		DisjunctInstructionList* m_Instructions;
 		LabelCodeList* m_MRI_Code;
-		LabelCodeList* m_nonMRI_code;
+		LabelCodeList* m_nonMRI_Code;
 		LabelCodeList m_AddressList;
 		StringControlTools tool;
 
@@ -53,9 +56,13 @@ namespace wc_assembler
 		string& address,
 		string& indirect);
 
+		short
+		findAddressByLabel
+		(const string& label);
+
 		bool
 		isSingleInstruction
-		(const DisjunctInstruction& instruction);
+		(DisjunctInstruction& instruction);
 		
 	};
 }

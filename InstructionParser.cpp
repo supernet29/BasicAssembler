@@ -7,7 +7,7 @@ namespace wc_assembler
 	LabelCodeList* MRI_Code,
 	LabelCodeList* nonMRI_Code)
 	:m_MRI_Code(MRI_Code), m_nonMRI_Code(nonMRI_Code),
-	m_instructions(instructionList)
+	m_Instructions(instructionList)
 	{
 	}
 
@@ -18,7 +18,7 @@ namespace wc_assembler
 	}
 
 	BinaryInstructionList*
-	parseInstructions
+	InstructionParser::parseInstructions
 	()
 	{
 		string instruction;
@@ -33,14 +33,14 @@ namespace wc_assembler
 		
 		makeAddressTable();
 
-		for(DisjunctInstructionList::iterator i = m_Instructions.begin();
-		i != m_Instructions.end(); i++)
+		for(DisjunctInstructionList::iterator i = m_Instructions->begin();
+		i != m_Instructions->end(); i++)
 		{
-			address = (short)*i.getAddress();
+			address = (short)i->getAddress();
 
 			if(isSingleInstruction(*i))
 			{
-				instruction = *i.getInstruction();
+				instruction = i->getInstruction();
 
 				code = getNonMRICode(instruction);
 				if(code == -1)
@@ -53,7 +53,7 @@ namespace wc_assembler
 			else
 			{
 				splitInstructionString
-				(*i.getInstruction(), instruction, label, indirect);
+				(i->getInstruction(), instruction, label, indirect);
 				
 				if(instruction == "DEC")
 				{
@@ -63,7 +63,7 @@ namespace wc_assembler
 				{
 					code = tool.stringToInt(label, 16);
 				}
-				else if((code = getMRICode(instruction) == -1)
+				else if((code = getMRICode(instruction)) == -1)
 				{
 					cout<<"ERROR :: nonvaild instruction"<<endl;
 					exit(100);
@@ -97,24 +97,40 @@ namespace wc_assembler
 
 
 	void
-	InstrcutionParser::makeAddressTable
+	InstructionParser::makeAddressTable
 	()
 	{
-		//TODO
+		DisjunctInstructionList::iterator it;
+		LabelCode* temp;
+		for(it = m_Instructions->begin(); it != m_Instructions->end(); it++)
+		{
+			if(it->getLabel() != "")
+			{
+				temp = new LabelCode(it->getLabel(), it->getAddress());
+				m_AddressList.push_back(*temp);
+			}
+		}	
 	}
 
 	short
 	InstructionParser::getMRICode
 	(const string& label)
 	{
-		//TODO
+		return findCodeByLabel(*m_MRI_Code, label);
 	}
 
 	short
-	InstructionPaser::getNonMRICode
+	InstructionParser::getNonMRICode
 	(const string& label)
 	{
-		//TODO
+		return findCodeByLabel(*m_nonMRI_Code, label);
+	}
+
+	short
+	InstructionParser::findAddressByLabel
+	(const string& label)
+	{
+		return findCodeByLabel(m_AddressList, label);
 	}
 	
 	int
@@ -124,13 +140,37 @@ namespace wc_assembler
 	string& address,
 	string& indirect)
 	{
-		//TODO
+		string temp = src;
+		unsigned int spaceNumber = tool.countCharacter(temp,' ');
+
+		tool.splitStringBetweenCharacter(temp, instruction, ' ');
+		if(spaceNumber == 1)
+		{
+			address = temp;
+			indirect = "";
+			return 1;
+		}
+		else if(spaceNumber == 2)
+		{
+			tool.splitStringBetweenCharacter(temp, address, ' ');
+			indirect = temp;
+			return 2;
+		}
+		else
+		{
+			return -1;
+		}
 	}
 
 	bool
-	isSingleInstruction
-	(const DisjunctInstruction& instruction)
+	InstructionParser::isSingleInstruction
+	(DisjunctInstruction& instruction)
 	{
-		//TODO
+		string temp = instruction.getInstruction();
+		unsigned int spaceNumber = tool.countCharacter(temp, ' ');
+		if(spaceNumber == 0)
+			return true;
+		else
+			return false;
 	}
 }
