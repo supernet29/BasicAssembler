@@ -3,6 +3,11 @@
 #include "StringControlTools.h"
 #include "InstructionReader.h"
 #include "DisjunctInstruction.h"
+#include "BinaryInstruction.h"
+#include "InstructionParser.h"
+#include "MRI.h"
+#include "NonMRI.h"
+
 
 using namespace std;
 using namespace wc_string;
@@ -18,6 +23,11 @@ void printDisjunctInstruction(DisjunctInstruction& instruction)
 	cout<<"address: " <<hex<<instruction.getAddress() <<endl;
 	cout<<"label: "<<"="<<instruction.getLabel()<<"="<<endl;
 	cout<<"instruction: "<<"="<<instruction.getInstruction()<<"="<<dec<<endl;
+}
+
+void printBinaryInstruction(BinaryInstruction& instruction)
+{
+	cout<<hex<<instruction.getAddress()<<"\t"<<instruction.getCode()<<dec<<endl;
 }
 	
 int main(int argc, char** argv)
@@ -46,14 +56,19 @@ int main(int argc, char** argv)
 	
 	InstructionReader reader(&asmFile);
 	DisjunctInstructionList* result = reader.readInstructions();	
+	LabelCodeList* MRICodes = MRI::getMRIList();
+	LabelCodeList* NonMRICodes = NonMRI::getNonMRIList();
+	InstructionParser parser(result, MRICodes, NonMRICodes);
 	
-	for(DisjunctInstructionList::iterator i = result->begin(); i != result->end(); i++, lineNumber++)
+	BinaryInstructionList* binaryResult = parser.parseInstructions();
+		
+	cout<<"Address \t Instruction"<<endl;
+	cout<<"---------------------------------"<<endl;
+	for(BinaryInstructionList::iterator i = binaryResult->begin(); i != binaryResult->end(); i++)
 	{
-		cout<<"-----------------------------"<<endl;
-		cout<<"LineNumber: " <<lineNumber <<endl;
-		cout<<"-----------------------------"<<endl;
-		printDisjunctInstruction(*i);
+		printBinaryInstruction(*i);
 	}
+	
 	
 	return 0;
 }

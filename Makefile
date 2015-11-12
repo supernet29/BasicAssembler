@@ -1,8 +1,8 @@
 
-tester : tester.o StringControlTools.o DisjunctInstruction.o InstructionReader.o
-	g++ -o tester.out tester.o StringControlTools.o DisjunctInstruction.o InstructionReader.o
+tester.out : tester.o StringControlTools.o DisjunctInstruction.o InstructionReader.o BinaryInstruction.o InstructionParser.o LabelCode.o MRI.o NonMRI.o
+	g++ -o tester.out tester.o StringControlTools.o DisjunctInstruction.o InstructionReader.o BinaryInstruction.o InstructionParser.o LabelCode.o MRI.o NonMRI.o
 
-tester.o : StringControlTools.h DisjunctInstruction.h InstructionReader.h tester.cpp
+tester.o : StringControlTools.h DisjunctInstruction.h InstructionReader.h tester.cpp BinaryInstruction.h InstructionParser.h MRI.h NonMRI.h
 	g++ -c tester.cpp
 
 StringControlTools.o : StringControlTools.h StringControlTools.cpp
@@ -22,6 +22,12 @@ InstructionParser.o : DisjunctInstruction.h LabelCode.h StringControlTools.h Bin
 
 LabelCode.o : LabelCode.h LabelCode.cpp
 	g++ -c LabelCode.cpp
+
+MRI.o : LabelCode.h MRI.h MRI.cpp
+	g++ -c MRI.cpp
+
+NonMRI.o : LabelCode.h NonMRI.h NonMRI.cpp
+	g++ -c NonMRI.cpp
 
 clean :
 	rm *.o tester.out
