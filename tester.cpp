@@ -7,6 +7,7 @@
 #include "InstructionParser.h"
 #include "MRI.h"
 #include "NonMRI.h"
+#include "InstructionWriter.h"
 
 
 using namespace std;
@@ -32,6 +33,9 @@ void printBinaryInstruction(BinaryInstruction& instruction)
 	
 int main(int argc, char** argv)
 {
+	MRI mri;
+	NonMRI nonMri;
+	StringControlTools tool;
 	int alpa = 0;
 	cout<<"============="<<endl;
 	cout<<"Module Tester"<<endl;
@@ -54,15 +58,42 @@ int main(int argc, char** argv)
 		return 2;
 	}
 	
+	string arg1 = argv[1];
+	string outFileName;
+	tool.splitStringBetweenCharacter(arg1, outFileName, '.');
+	outFileName += ".oasmb";
+	
+	
+	ofstream outFile;
+	outFile.open(outFileName.c_str());
+
+	if(outFile.fail())
+	{
+		cerr<<"ERROR:: File open failed"<<endl;
+		return 2;
+	}
+		
+	
 	InstructionReader reader(&asmFile);
 	DisjunctInstructionList* result = reader.readInstructions();	
-	LabelCodeList* MRICodes = MRI::getMRIList();
-	LabelCodeList* NonMRICodes = NonMRI::getNonMRIList();
+	asmFile.close();
+	LabelCodeList* MRICodes = mri.getMRIList();
+	LabelCodeList* NonMRICodes = nonMri.getNonMRIList();
 	InstructionParser parser(result, MRICodes, NonMRICodes);
 	
 	BinaryInstructionList* binaryResult = parser.parseInstructions();
+	
+	InstructionWriter writer(binaryResult, outFile);
+	if(!writer.writeInstructionToFile())
+	{
+		cerr<<"ERROR:: Writing File is failed"<<endl;
+		return 3;
+	}
+	outFile.close();
 		
-	cout<<"Address \t Instruction"<<endl;
+		
+	cout<<"---------------------------------"<<endl;
+	cout<<"Address \t| Instruction"<<endl;
 	cout<<"---------------------------------"<<endl;
 	for(BinaryInstructionList::iterator i = binaryResult->begin(); i != binaryResult->end(); i++)
 	{

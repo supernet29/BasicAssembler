@@ -3,11 +3,11 @@
 namespace wc_assembler
 {
 	DisjunctInstruction::DisjunctInstruction
-	(const string& label, const string& instruction, int address)
+	(const string& label, const string& instruction,
+	 int address, int line)
+	:label(label), instruction(instruction), address(address),
+	 line(line)
 	{
-		this->label = label;
-		this->instruction = instruction;
-		this->address = address;
 	}
 	
 	const string&
@@ -29,5 +29,12 @@ namespace wc_assembler
 	()
 	{
 		return address;
+	}
+
+	int
+	DisjunctInstruction::getLineNumber
+	()
+	{
+		return line;
 	}
 }

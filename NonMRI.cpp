@@ -2,6 +2,12 @@
 
 namespace wc_assembler
 {
+	NonMRI::NonMRI
+	()
+	:m_NonMRI_List(NULL)
+	{
+	}
+
 	LabelCodeList*
 	NonMRI::getNonMRIList
 	()

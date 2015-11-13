@@ -1,0 +1,5 @@
+X, LDA X /load y
+ STA X /store x
+ hlt
+ hex 10
+ end

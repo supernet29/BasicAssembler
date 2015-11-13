@@ -34,8 +34,7 @@ namespace wc_assembler
 		DisjunctInstructionList*
 		readInstructions
 		();
-		//TODO
-		//
+
 		const static string s_ORG;
 		const static string s_END; 
 		
@@ -44,7 +43,6 @@ namespace wc_assembler
 		bool streamOn;
 		StringControlTools tool;
 		istream * fileStream;
-		//TODO
 
 		bool
 		isORG

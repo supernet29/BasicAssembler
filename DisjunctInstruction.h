@@ -13,7 +13,10 @@ namespace wc_assembler
 	{
 	public:
 		DisjunctInstruction
-		(const string& label, const string& instruction, int address);
+		(const string& label,
+		 const string& instruction,
+		 int address,
+		 int line);
 		
 		const string& 
 		getLabel
@@ -27,8 +30,13 @@ namespace wc_assembler
 		getAddress
 		();
 
+		int
+		getLineNumber
+		();
+
 	private:
 		int address;
+		int line;
 		string label;
 		string instruction;
 	};

@@ -2,6 +2,13 @@
 
 namespace wc_assembler
 {
+	
+	MRI::MRI
+	()
+	:m_MRI_List(NULL)
+	{
+	}
+
 	LabelCodeList*
 	MRI::getMRIList
 	()

@@ -10,14 +10,15 @@ namespace wc_assembler
 	class NonMRI
 	{
 		public:
-		static
+		NonMRI
+		();
+
 		LabelCodeList*
 		getNonMRIList
 		();	
 		private:
-		static LabelCodeList* m_NonMRI_List;
+		LabelCodeList* m_NonMRI_List;
 		
-		static
 		void
 		makeNonMRIList
 		();

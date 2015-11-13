@@ -41,17 +41,30 @@ namespace wc_string
 		countCharacter
 		(const string& src, char ch);
 		
+		//convert positive hex string to unsigned int
 		unsigned int
 		hexStringToUInt
 		(const string& src);
 
+		//convert hex digit to integer
 		int
 		digitToInteger
 		(char digit);
 		
+		//convert positive integer string to integer
 		int
 		stringToInt
 		(const string& src, int base);
+
+		//convert string to upper string
+		void
+		toUpperString
+		(string& src);
+		
+		//convert string to lower string
+		void
+		toLowerString
+		(string& src);
 
 	};
 }

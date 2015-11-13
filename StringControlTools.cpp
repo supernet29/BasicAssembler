@@ -184,6 +184,7 @@ namespace wc_string
 			break;
 		default:
 			cout<<"ERROR:: no vaild Format"<<endl;
+			cout<<"ERROR DIGIT:: "<<digit<<endl;
 			return -1;
 		}
 		return j;
@@ -202,11 +203,32 @@ namespace wc_string
 			j = digitToInteger(src[i]);
 			if(j < 0 || j >= base)
 			{
-				cout<<"ERROR:: format Error";
+				cout<<"ERROR:: format Error"<<endl;
+				cout<<"ERROR STRING :: ="<< src<<"=" <<endl;
 			}
 			result += (unsigned int)(j * pow(base, srcLength - i - 1));
 		}
 		return result;
 		
+	}
+
+	void
+	StringControlTools::toUpperString
+	(string& src)
+	{
+		for(int i = 0; i < src.length(); i++)
+		{
+			src[i] = toupper(src[i]);
+		}
+	}
+
+	void
+	StringControlTools::toLowerString
+	(string& src)
+	{
+		for(int i = 0; i < src.length(); i++)
+		{
+			src[i] = tolower(src[i]);
+		}
 	}
 }

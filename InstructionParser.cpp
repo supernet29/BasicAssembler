@@ -46,6 +46,7 @@ namespace wc_assembler
 				if(code == -1)
 				{
 					cout<<"ERROR :: nonvaild instruction"<<endl;
+					cout<<"ERROR LINE :: "<<i->getLineNumber()<<endl;
 					exit(100);
 						
 				}
@@ -57,7 +58,7 @@ namespace wc_assembler
 				
 				if(instruction == "DEC")
 				{
-					code = tool.stringToInt(label, 10);
+					code = atoi(label.c_str());
 				}
 				else if(instruction == "HEX")
 				{
@@ -66,26 +67,33 @@ namespace wc_assembler
 				else if((code = getMRICode(instruction)) == -1)
 				{
 					cout<<"ERROR :: nonvaild instruction"<<endl;
+					cout<<"ERROR LINE :: "<<i->getLineNumber()<<endl;
 					exit(100);
 				}
-				labelAddress = 	findAddressByLabel(label);
+				else
+				{
+					labelAddress = 	findAddressByLabel(label);
 
-				if(labelAddress == -1)
-				{
-					cout<<"ERROR :: no exist label"<<endl;
-					exit(101);
+					if(labelAddress == -1)
+					{
+						cout<<"ERROR :: no exist label"<<endl;
+						cout<<"ERROR LABEL :: "<<label<<endl;
+						cout<<"ERROR LINE :: "<<i->getLineNumber()<<endl;
+						exit(101);
+					}
+					code |= labelAddress;
+					
+					if(indirect == "I")
+					{
+						code |= 0x8000;
+					}
+					else if( indirect != "")
+					{
+						cout<<"ERROR :: no indirect Symbol"<<endl;
+						cout<<"ERROR LINE :: "<<i->getLineNumber()<<endl;
+						exit(102);
+					}	
 				}
-				code |= labelAddress;
-				
-				if(indirect == "I")
-				{
-					code |= 0x8000;
-				}
-				else if( indirect != "")
-				{
-					cout<<"ERROR :: no indirect Symbol"<<endl;
-					exit(102);
-				}	
 					
 			}
 
@@ -106,6 +114,12 @@ namespace wc_assembler
 		{
 			if(it->getLabel() != "")
 			{
+				if(findAddressByLabel(it->getLabel()) != -1)
+				{
+					cout<<"ERROR :: Repeated symbol address"<<endl;
+					cout<<"ERROR LINE :: "<<it->getLineNumber()<<endl; 
+					exit(103);
+				}
 				temp = new LabelCode(it->getLabel(), it->getAddress());
 				m_AddressList.push_back(*temp);
 			}

@@ -51,7 +51,7 @@ namespace wc_assembler
 		string instruction;
 		DisjunctInstruction* temp;
 		DisjunctInstructionList* instList;
-
+		int lineNumber = 0;
 		ln = 0;
 
 		if(!streamOn)
@@ -67,6 +67,8 @@ namespace wc_assembler
 		while(getline(*fileStream, line))
 		{
 			tool.deleteConnectedSpaceCharacter(line);
+			tool.toUpperString(line);
+			lineNumber++;
 
 			if(tool.findCharacterPosition(line,',') < 0)
 				label = "";
@@ -74,6 +76,7 @@ namespace wc_assembler
 			{
 				tool.splitStringBetweenCharacter(line, label, ',');
 			}
+			tool.cleanString(label);
 			
 			if(tool.findCharacterPosition(line, '/') < 0 )
 				instruction = line;	
@@ -82,8 +85,6 @@ namespace wc_assembler
 				tool.splitStringBetweenCharacter
 				(line, instruction, '/');
 			}
-
-			tool.cleanString(label);
 			tool.cleanString(instruction);
 
 			if(label == "")
@@ -97,9 +98,14 @@ namespace wc_assembler
 				{
 					break;
 				}
+				else if(instruction == "")
+				{
+					continue;
+				}
 			}
 
-			temp = new DisjunctInstruction(label, instruction, ln);
+			temp = new DisjunctInstruction(label, instruction,
+				 ln, lineNumber);
 			if(!temp)
 			{
 				cerr<<"ERROR::Memory allocation fail"<<endl;

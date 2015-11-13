@@ -1,0 +1,20 @@
+	ORG 100	/Main program
+	LDA X	/Load X
+	BSA SH4	/Branch to subroutine
+	STA X	/Store Shifted number
+	LDA Y	/Load Y
+	BSA SH4 /Branch to subroutine again
+	STA Y	/Store shifted number
+	HLT
+X,	HEX 1234
+Y,	HEX 4321
+		/Subroutine to shift left 4 times
+SH4,	HEX 0	/Store return address here
+	CIL	/Circulate left one
+	CIL
+	CIL
+	CIL
+	AND MSK	/Set AC(13~16) to zero
+	BUN SH4 I	/Return to main program
+MSK,	HEX FFF0	/Mask operand
+	END 

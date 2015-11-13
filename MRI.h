@@ -10,15 +10,15 @@ namespace wc_assembler
 	class MRI
 	{
 		public:
-		static	
+		MRI();
+
 		LabelCodeList*
 		getMRIList
 		();
 		
 		private:		
-		static LabelCodeList* m_MRI_List;
+		LabelCodeList* m_MRI_List;
 
-		static
 		void
 		makeMRIList
 		();
