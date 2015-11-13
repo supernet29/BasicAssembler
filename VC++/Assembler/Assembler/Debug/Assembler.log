@@ -1,0 +1,34 @@
+﻿Build started 2015-11-13 오후 5:13:36.
+     1>Project "C:\Users\woochankim\Documents\project\Assembler\VC++\Assembler\Assembler\Assembler.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\BinaryInstruction.cpp ..\..\..\DisjunctInstruction.cpp ..\..\..\InstructionParser.cpp ..\..\..\InstructionReader.cpp ..\..\..\InstructionWriter.cpp ..\..\..\LabelCode.cpp ..\..\..\main.cpp ..\..\..\MRI.cpp ..\..\..\NonMRI.cpp ..\..\..\StringControlTools.cpp
+         StringControlTools.cpp
+     1>c:\users\woochankim\documents\project\assembler\stringcontroltools.cpp(219): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\woochankim\documents\project\assembler\stringcontroltools.cpp(229): warning C4018: '<': signed/unsigned mismatch
+         NonMRI.cpp
+         MRI.cpp
+         main.cpp
+         LabelCode.cpp
+         InstructionWriter.cpp
+         InstructionReader.cpp
+         InstructionParser.cpp
+         DisjunctInstruction.cpp
+         BinaryInstruction.cpp
+         Generating Code...
+       Link:
+         C:\Program Files\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\woochankim\Documents\project\Assembler\VC++\Assembler\Debug\Assembler.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\woochankim\Documents\project\Assembler\VC++\Assembler\Debug\Assembler.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\woochankim\Documents\project\Assembler\VC++\Assembler\Debug\Assembler.lib" /MACHINE:X86 Debug\BinaryInstruction.obj
+         Debug\DisjunctInstruction.obj
+         Debug\InstructionParser.obj
+         Debug\InstructionReader.obj
+         Debug\InstructionWriter.obj
+         Debug\LabelCode.obj
+         Debug\main.obj
+         Debug\MRI.obj
+         Debug\NonMRI.obj
+         Debug\StringControlTools.obj
+         Assembler.vcxproj -> C:\Users\woochankim\Documents\project\Assembler\VC++\Assembler\Debug\Assembler.exe
+     1>Done Building Project "C:\Users\woochankim\Documents\project\Assembler\VC++\Assembler\Assembler\Assembler.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:05.92

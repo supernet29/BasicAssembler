@@ -1,3 +1,13 @@
 *.o
 *.swp
 *.out
+\VC++\Assembler\Assembler\Debug
+\VC++\Assembler\Debug
+*.sdf
+*.exe
+*.ilk
+*.pdb
+*.obj
+*.idb
+*.tlog
+*.lastbuildstate
